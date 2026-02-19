@@ -31,7 +31,7 @@ def start_thread(task_func, label_frame):
 
 def run_ytdlp(url, flags):
     valid = validators.url(url)
-    
+
     if not url or not valid:
         return "Error: Invalid URL"
     
@@ -45,6 +45,9 @@ def run_ytdlp(url, flags):
             creationflags=subprocess.CREATE_NO_WINDOW,
         )
 
+        print(f"\n\n\nerror\n{result.stderr}")
+        print(f"\n\n\nout\n{result.stdout}")
+
         out = result.stderr + "\n" + result.stdout
         playlist = False
 
@@ -52,7 +55,10 @@ def run_ytdlp(url, flags):
             if "Downloading playlist" in line:
                 playlist = True
 
-            if any(w in line.lower() for w in ("unavailable", "error")):
+            if "Unsupported URL" in line:
+                return line
+
+            if any(w in line.lower() for w in (": video unavailable", "error:")):
                 return line.split(".", 1)[0]
 
             if "already been downloaded" in line and not playlist:
