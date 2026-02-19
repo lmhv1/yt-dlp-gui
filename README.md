@@ -9,5 +9,5 @@
 pip install pyinstaller
 ```
 ```
-pyinstaller --onefile --windowed --icon=logo.ico --add-binary "yt-dlp.exe;." ytdlpgui.py
+pyinstaller ytdlpgui.spec
 ```
