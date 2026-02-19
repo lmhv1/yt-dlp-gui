@@ -1,6 +1,6 @@
 ![GUI](https://github.com/lmhv1/yt-dlp-gui/blob/main/gui.png?raw=true)
 
-[download](https://github.com/lmhv1/yt-dlp-gui/releases/download/1.0/ytdlpgui.exe)
+[download](https://github.com/lmhv1/yt-dlp-gui/releases/download/1.1/ytdlpgui.exe)
 
 
 
