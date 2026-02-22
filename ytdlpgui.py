@@ -86,9 +86,13 @@ def button_folder():
         subprocess.run(["xdg-open", path])
 
 def main():
+
     root = tk.Tk()
     root.title("yt-dlp GUI")
     root.resizable(False, False)
+
+    def close_app(r):
+        root.destroy()
 
     # Row 0
     url_frame = tk.Frame(root)
@@ -132,6 +136,7 @@ def main():
     status_frame = tk.Frame(root)
     status_frame.grid(row=2, column=0, padx=10, pady=(20, 5), sticky="e")
 
+    root.bind('<Escape>', lambda r: close_app(r))
     root.mainloop()
 
 if __name__ == "__main__":
