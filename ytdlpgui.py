@@ -15,6 +15,9 @@ def get_bundled_exe_path():
     return os.path.join(base_path, "yt-dlp.exe")
 
 def button_download(entry, label_frame, flags=[]):
+    entry.focus_set()
+    entry.selection_range(0, tk.END)
+
     url = entry.get().strip()
 
     start_thread(lambda: run_ytdlp(url, flags), label_frame)
@@ -86,13 +89,9 @@ def button_folder():
         subprocess.run(["xdg-open", path])
 
 def main():
-
     root = tk.Tk()
     root.title("yt-dlp GUI")
     root.resizable(False, False)
-
-    def close_app(r):
-        root.destroy()
 
     # Row 0
     url_frame = tk.Frame(root)
@@ -136,7 +135,8 @@ def main():
     status_frame = tk.Frame(root)
     status_frame.grid(row=2, column=0, padx=10, pady=(20, 5), sticky="e")
 
-    root.bind('<Escape>', lambda r: close_app(r))
+    url_entry.bind("<Return>", lambda e: download_button.invoke())
+    root.bind('<Escape>', lambda e: root.destroy())
     root.mainloop()
 
 if __name__ == "__main__":
